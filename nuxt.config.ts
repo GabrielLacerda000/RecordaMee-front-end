@@ -11,7 +11,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       bodyAttrs: {
-        class: 'bg-black text-white font-semibold font-mono'
+        class: 'font-semibold font-mono'
       }
     },
     pageTransition: { name: 'page', mode: 'out-in' }
