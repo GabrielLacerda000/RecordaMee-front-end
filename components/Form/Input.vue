@@ -1,6 +1,7 @@
 <script setup lang="ts">
+const modelValue = defineModel()
+
 defineProps({
-  modelValue: String,
   type: {
     type: String,
     default: 'text',
@@ -15,8 +16,8 @@ defineProps({
 <template>
   <input
     :id="id"
+    v-model="modelValue"
     :type="type"
-    :value="modelValue"
     :placeholder="placeholder"
     class="border border-gray-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
   />
