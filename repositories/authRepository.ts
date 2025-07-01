@@ -1,6 +1,6 @@
 import { useAuthStore } from "~/store/useAuthStore"
 import type { ApiResponse } from "~/types/api/api"
-import type { User, Auth } from "~/types/user/User"
+import type { User } from "~/types/user/User"
 
 export type LoginForm = {
     email: string
@@ -32,6 +32,10 @@ export const AuthRepository = {
 
         const userStore = useAuthStore()
         userStore.setUser(data.value?.data?.user || null)
+        console.log('Usuário::',userStore.user)
+        console.log('Usuário logado:', userStore.isLoggedIn)
+
+        navigateTo('/')
 
         } catch (error: any) {
         console.error('Erro ao fazer login:', error)
