@@ -9,7 +9,6 @@ export function useBaseApi<T>(path: string, options: UseFetchOptions<T> = {}) {
     Accept: 'application/json'
 };
 
-
     const token = useCookie('auth_token');
 
     if (token.value) {

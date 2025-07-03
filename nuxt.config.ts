@@ -11,7 +11,8 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxtjs/tailwindcss',
     '@pinia/nuxt',
-    '@nuxt/fonts'
+    '@nuxt/fonts',
+    'nuxt-toast'
   ],
   app: {
     head: {
