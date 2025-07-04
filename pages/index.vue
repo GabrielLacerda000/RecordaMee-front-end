@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
 import { useExpenseStore } from '~/store/useExpenseStore';
 
 useSeoMeta({

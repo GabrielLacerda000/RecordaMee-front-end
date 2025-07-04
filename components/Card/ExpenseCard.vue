@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import formatCurrency from '~/utils/format/formatCurrency';
+import formatDate from '~/utils/format/formatDate';
 
 const props = defineProps({
   name: {
@@ -43,17 +45,7 @@ const categoryColor = computed(() => {
   return categoryMap[props.category]?.color || 'gray';
 });
 
-const formatDate = (dateString: string) => {
-  const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: '2-digit', year: 'numeric' };
-  return new Date(dateString).toLocaleDateString('pt-BR', options);
-};
-
-const formatCurrency = (value: number) => {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL',
-  }).format(value);
-};
+console.log('props:', props.category);
 </script>
 
 <template>

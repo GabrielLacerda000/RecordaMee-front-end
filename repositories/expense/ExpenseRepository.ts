@@ -15,8 +15,6 @@ export const ExpenseRepository = {
             if (data.value?.status === 'error') {
                 throw new Error(data.value.message || 'Erro na requisição ao buscar despesas');
             }
-
-            console.log('Dados das despesas:', data.value?.data);
             
             const expenseStore = useExpenseStore();
             expenseStore.setExpenses(data.value?.data || []);
