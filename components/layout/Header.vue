@@ -1,5 +1,20 @@
 <script setup lang="ts">
+import { onMounted, ref } from 'vue';
+import { ExpenseRepository } from '~/repositories/expense/ExpenseRepository';
+import type { Summary } from '~/types/expense/Sumary';
 
+const summary = ref<Summary | null>(null);
+
+onMounted(async () => {
+  summary.value = await ExpenseRepository.getSummary();
+});
+
+const formatCurrency = (value: number) => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format(value);
+};
 </script>
 
 <template>
@@ -7,15 +22,15 @@
     <div class="flex space-x-4">
       <div>
         <span>Total de Despesas:</span>
-        <span>R$ 1.250,00</span>
+        <span>{{ formatCurrency(summary?.total || 0) }}</span>
       </div>
       <div>
         <span>Total Pago:</span>
-        <span>R$ 750,00</span>
+        <span>{{ formatCurrency(summary?.totalPaid || 0) }}</span>
       </div>
       <div>
         <span>Total Restante:</span>
-        <span>R$ 500,00</span>
+        <span>{{ formatCurrency(summary?.totalPending || 0) }}</span>
       </div>
     </div>
     <InputsSearchInput />

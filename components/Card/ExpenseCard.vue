@@ -1,31 +1,3 @@
-<template>
-  <div class="bg-[#F5F5F5] rounded-md p-4 border border-gray-300 flex items-center justify-between">
-    <div class="flex items-center">
-      <div :class="`bg-${categoryColor}-100 p-3 rounded-md`">
-        <Icon :name="categoryIcon" :class="`text-${categoryColor}-500`" size="2em" />
-      </div>
-      <div class="ml-4">
-        <p class="font-bold">{{ name }}</p>
-        <p class="text-sm text-gray-500">{{ formatDate(createdAt) }}</p>
-      </div>
-    </div>
-    <div class="flex items-center">
-      <div class="text-right mr-4">
-        <p class="font-bold text-lg">{{ formatCurrency(value) }}</p>
-        <p class="text-sm text-gray-500">Vence em: {{ formatDate(dueDate) }}</p>
-      </div>
-      <div class="flex flex-col">
-        <button class="mb-2">
-          <Icon name="uil:edit" class="text-gray-500 hover:text-gray-700" size="1.5em" />
-        </button>
-        <button>
-          <Icon name="uil:trash-alt" class="text-gray-500 hover:text-red-500" size="1.5em" />
-        </button>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { computed } from 'vue';
 
@@ -53,7 +25,7 @@ const props = defineProps({
 });
 
 const categoryMap: { [key: string]: { icon: string; color: string } } = {
-  housing: { icon: 'uil:home-alt', color: 'green' },
+  housing: { icon: 'material-symbols:house-rounded', color: 'green' },
   utilities: { icon: 'uil:bolt-alt', color: 'yellow' },
   food: { icon: 'uil:crockery', color: 'red' },
   transport: { icon: 'uil:car-sideview', color: 'blue' },
@@ -84,22 +56,40 @@ const formatCurrency = (value: number) => {
 };
 </script>
 
-<style scoped>
-/* Adicionando as cores de fundo e texto dinamicamente para o Tailwind CSS */
-.bg-green-100 { background-color: #D1FAE5; }
-.text-green-500 { color: #10B981; }
-.bg-yellow-100 { background-color: #FEF3C7; }
-.text-yellow-500 { color: #F59E0B; }
-.bg-red-100 { background-color: #FEE2E2; }
-.text-red-500 { color: #EF4444; }
-.bg-blue-100 { background-color: #DBEAFE; }
-.text-blue-500 { color: #3B82F6; }
-.bg-purple-100 { background-color: #E9D5FF; }
-.text-purple-500 { color: #8B5CF6; }
-.bg-pink-100 { background-color: #FCE7F3; }
-.text-pink-500 { color: #EC4899; }
-.bg-indigo-100 { background-color: #E0E7FF; }
-.text-indigo-500 { color: #6366F1; }
-.bg-gray-100 { background-color: #F3F4F6; }
-.text-gray-500 { color: #6B7280; }
-</style>
+<template>
+  <div class="bg-[#F5F5F5] rounded-md p-4 my-3 border border-gray-300 flex items-center justify-between ">
+    <div class="flex items-center">
+      <div :class="`bg-${categoryColor}-100 p-3 rounded-md`">
+        <Icon :name="categoryIcon" :class="`text-${categoryColor}-500`" :style="`color: ${categoryColor}-500`" size="2em" />
+      </div>
+
+      <div class="ml-4">
+        <p class="font-bold">{{ name }}</p>
+        <p class="text-sm text-gray-500">{{ formatDate(createdAt) }}</p>
+      </div>
+    </div>
+
+    <div class="flex items-center">
+      <div class="text-right mr-4">
+        <p class="font-bold text-lg">{{ formatCurrency(value) }}</p>
+        <p class="text-sm text-gray-500">Vence em: {{ formatDate(dueDate) }}</p>
+      </div>
+
+      <div class="flex gap-3">
+        <div class="bg-green-200 p-2 h-10 w-10 rounded-md hover:bg-green-400 transition-colors duration-300 ">
+          <button class="mb-2">
+            <Icon name="uil:edit" class="text-green-500 hover:text-green-600 transition-colors duration-300 cursor-pointer" size="1.5em" />
+          </button>
+
+        </div>
+
+        <div class="bg-red-200 hover:bg-red-400 transition-colors duration-300 h-10 w-10 p-2 rounded-md">
+          <button>
+            <Icon name="uil:trash-alt" class="text-red-500 hover:text-red-600 transition-colors duration-300 cursor-pointer" size="1.5em" />
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</template>

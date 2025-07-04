@@ -70,7 +70,7 @@ export const AuthRepository = {
         } catch (error: any) {
         console.error('Erro ao fazer login:', error)
 
-        catchRepositoryExceptions(error, 'Erro ao fazer login. Por favor, tente novamente.')
+        catchRepositoryExceptions(error, 'Erro ao deslogar. Por favor, tente novamente.')
         }
     },
 
@@ -87,7 +87,7 @@ export const AuthRepository = {
       }
 
       const userStore = useAuthStore()
-      userStore.setUser(data.value?.data?.user)
+      userStore.setUser(data?.value?.data || null)
 
     } catch (err: any) {
       console.error('Erro ao buscar usuário:', err)
