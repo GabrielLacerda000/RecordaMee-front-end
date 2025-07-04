@@ -3,6 +3,11 @@ import colors from 'tailwindcss/colors'
 export default {
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Roboto', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif'],
+        roboto: ['Roboto', 'sans-serif'],
+      },
       colors: {
         'gray-primary': '#F5F5F5',
         'white-primary': '#FFFFFF',
