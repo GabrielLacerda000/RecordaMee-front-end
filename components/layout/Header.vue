@@ -5,10 +5,13 @@ import type { Summary } from '~/types/expense/Sumary';
 
 const summary = ref<Summary | null>(null);
 
-onMounted(async () => {
-  summary.value = await ExpenseRepository.getSummary();
-});
-
+try {
+  const fetchedSummary = await ExpenseRepository.getSummary();
+  summary.value = fetchedSummary || null;
+} catch (error) {
+  console.error('Error ao buscar o sumario:', error);
+  summary.value = null;
+}
 const formatCurrency = (value: number) => {
   return new Intl.NumberFormat('pt-BR', {
     style: 'currency',
@@ -18,8 +21,8 @@ const formatCurrency = (value: number) => {
 </script>
 
 <template>
-  <header class="bg-gray-800 text-white p-4 flex justify-between items-center">
-    <div class="flex space-x-4">
+  <header class="bg-[#01C38D] p-4 flex justify-between items-center">
+    <div class="flex space-x-4 flex-grow justify-center">
       <div>
         <span>Total de Despesas:</span>
         <span>{{ formatCurrency(summary?.total || 0) }}</span>
