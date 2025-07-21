@@ -54,6 +54,6 @@ const formatCurrency = (value: number) => {
         </div>
       </div>
     </div>
-    <InputsSearchInput />
+    <!-- <InputsSearchInput /> -->
   </header>
 </template>
