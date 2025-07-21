@@ -51,12 +51,11 @@ const categoryBgColor = computed(() => {
   return categoryMap[categoryKey.value]?.bgColor || 'gray';
 });
 
-console.log('Category:', categoryKey.value, 'Icon:', categoryIcon.value, 'Color:', categoryColor.value);
 </script>
 
 <template>
   <div class="bg-[#F5F5F5] rounded-xl p-4 my-3 border border-gray-300 flex items-center justify-between shadow-md">
-    <div class="flex items-center">
+    <div class="flex items-center text-black">
       <div :class="`flex items-center justify-center ${categoryBgColor} p-3 rounded-xl`">
         <Icon :name="categoryIcon" :class="`${categoryColor}`" :style="`color: ${categoryColor}`" size="2em" />
       </div>
@@ -69,18 +68,18 @@ console.log('Category:', categoryKey.value, 'Icon:', categoryIcon.value, 'Color:
 
     <div class="flex items-center">
       <div class="text-right mr-4">
-        <p class="font-bold text-lg">{{ formatCurrency(value) }}</p>
+        <p class="font-bold text-lg text-black">{{ formatCurrency(value) }}</p>
         <p class="text-sm text-gray-500">Vence em: {{ formatDate(dueDate) }}</p>
       </div>
 
       <div class="flex gap-3">
-        <div class="bg-green-100 p-2 h-10 w-10 rounded-xl hover:bg-green-300 transition-colors duration-300 ">
+        <div class="bg-green-200 p-2 h-10 w-10 rounded-xl hover:bg-green-300 transition-colors duration-300 ">
           <button class="mb-2">
             <Icon name="uil:edit" class="text-green-400 hover:text-green-500 transition-colors duration-300 cursor-pointer" size="1.5em" />
           </button>
         </div>
 
-        <div class="bg-red-100 hover:bg-red-300 transition-colors duration-300 h-10 w-10 p-2 rounded-xl">
+        <div class="bg-red-200 hover:bg-red-300 transition-colors duration-300 h-10 w-10 p-2 rounded-xl">
           <button>
             <Icon name="uil:trash-alt" class="text-red-400 hover:text-red-500 transition-colors duration-300 cursor-pointer" size="1.5em" />
           </button>

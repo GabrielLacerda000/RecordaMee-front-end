@@ -18,7 +18,6 @@ export const ExpenseRepository = {
             
             const expenseStore = useExpenseStore();
             expenseStore.setExpenses(data.value?.data || []);
-            console.log('Dados das despesas da store:', useExpenseStore().expenses);
 
         } catch (error: any) {
             console.error('Erro ao buscar despesas:', error);

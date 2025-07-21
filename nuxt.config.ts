@@ -14,7 +14,6 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxt/fonts',
     '@nuxt/ui',
-    'nuxt-toast'
   ],
   css: ['~/assets/css/main.css'],
   app: {

@@ -10,6 +10,7 @@ export default defineNuxtPlugin(async () => {
   if (auth.user) {
     try {
       await ExpenseRepository.getExpenses()
+      
     } catch (e) {
       console.error('Erro ao buscar despesas:', e)
     }
