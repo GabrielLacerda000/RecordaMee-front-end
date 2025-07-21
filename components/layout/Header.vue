@@ -39,8 +39,8 @@ const formatCurrency = (value: number) => {
           <p class="text-md">Total Pago:</p>
           <span class="text-xl font-bold">{{ formatCurrency(summary?.totalPaid || 0) }}</span>
         </div>
-        <div class="w-12 h-12 rounded-full bg-[#1CDD43] flex items-center justify-center">
-          <Icon name="material-symbols:check" style="color: white" size="2em" />
+        <div class="w-12 h-12 rounded-full bg-green-200 flex items-center justify-center">
+          <Icon name="material-symbols:check" class="text-green-600" size="2em" />
         </div>
       </div>
 
@@ -49,8 +49,8 @@ const formatCurrency = (value: number) => {
           <p class="text-md">Total Restante:</p>
           <span class="text-xl font-bold">{{ formatCurrency(summary?.totalPending || 0) }}</span>
         </div>
-        <div class="w-12 h-12 rounded-full bg-[#FF4D4D] flex items-center justify-center">
-          <Icon name="material-symbols:money-off" style="color: white" size="2em" />
+        <div class="w-12 h-12 rounded-full bg-red-200 flex items-center justify-center">
+          <Icon name="material-symbols:money-off" class="text-red-600" size="2em" />
         </div>
       </div>
     </div>
