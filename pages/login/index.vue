@@ -7,7 +7,6 @@ useSeoMeta({
 })
 
 definePageMeta({
-  layout: 'guest',
   middleware: ['guest']
 })
 
@@ -30,7 +29,7 @@ const handleLogin = async () => {
 <template>
   <div class="bg-[#F5F5F5] min-h-screen flex items-center justify-center">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-      <h1 class="text-2xl font-bold text-center mb-8">RecordaMe</h1>
+      <h1 class="text-2xl font-bold text-center mb-8 text-black">RecordaMe</h1>
       <form @submit.prevent="handleLogin">
 
         <FormGroup label="Email">
@@ -51,6 +50,8 @@ const handleLogin = async () => {
             placeholder="Digite sua senha"
           />
         </FormGroup>
+
+        <UButton color="info">Button</UButton>
 
         <div class="flex items-center justify-between mb-6">
           <LinksLinkBtn text="Esqueceu a senha?" />
