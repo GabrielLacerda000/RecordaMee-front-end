@@ -23,19 +23,19 @@ const formatCurrency = (value: number) => {
 <template>
   <header class="p-4 flex justify-between items-center">
     <div class="flex space-x-4 flex-grow justify-center">
-      <div class="flex justify-between items-center p-3 rounded-lg bg-white shadow-md min-w-[250px]">
-        <div class="flex flex-col text-black">
+      <div class="flex justify-between items-center p-3 rounded-lg bg-[#222526] shadow-md min-w-[250px]">
+        <div class="flex flex-col text-white">
           <p class="text-md">Total de despesas:</p>
           <span class="text-xl font-bold">{{ formatCurrency(summary?.total || 0) }}</span>
         </div>
 
-        <div class="w-12 h-12 rounded-full bg-[#1CDD43] flex items-center justify-center">
+        <div class="w-12 h-12 rounded-full bg-[#2E7D32] flex items-center justify-center">
           <Icon name="material-symbols:attach-money" style="color: white" size="2em" />
         </div>
       </div>
       
-      <div class="flex justify-between items-center p-3 rounded-lg bg-white shadow-md min-w-[250px]">
-        <div class="flex flex-col text-black">
+      <div class="flex justify-between items-center p-3 rounded-lg bg-[#222526] shadow-md min-w-[250px]">
+        <div class="flex flex-col text-white">
           <p class="text-md">Total Pago:</p>
           <span class="text-xl font-bold">{{ formatCurrency(summary?.totalPaid || 0) }}</span>
         </div>
@@ -44,8 +44,8 @@ const formatCurrency = (value: number) => {
         </div>
       </div>
 
-      <div class="flex justify-between items-center p-3 rounded-lg bg-white shadow-md min-w-[250px]">
-        <div class="flex flex-col text-black">
+      <div class="flex justify-between items-center p-3 rounded-lg bg-[#222526] shadow-md min-w-[250px]">
+        <div class="flex flex-col text-white">
           <p class="text-md">Total Pendente:</p>
           <span class="text-xl font-bold">{{ formatCurrency(summary?.totalPending || 0) }}</span>
         </div>

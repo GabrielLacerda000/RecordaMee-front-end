@@ -12,7 +12,7 @@ defineProps({
 </script>
 
 <template>
-  <button class="flex items-center p-2 rounded-md hover:bg-gray-200 w-full text-left cursor-pointer text-black">
+  <button class="flex items-cente p-2 border border-[#2e2f2f] rounded-md hover:bg-[#2e2f2f] transition-colors duration-300 w-full text-left cursor-pointer text-white">
     <Icon :name="icon" size="1.5em" />
     <span class="ml-3">{{ text }}</span>
   </button>
