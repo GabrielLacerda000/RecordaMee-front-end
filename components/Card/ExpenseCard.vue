@@ -32,7 +32,7 @@ const props = defineProps({
 
 const categoryMap: { [key: string]: { icon: string; color: string , bgColor: string } } = {
   housing: { icon: 'material-symbols:house-rounded', color: 'text-green-500', bgColor: 'bg-green-100' },
-  utilities: { icon: 'uil:bolt-alt', color: 'textyellow-100', bgColor: 'bg-yellow-100' },
+  utilities: { icon: 'tabler:tool', color: 'text-yellow-500', bgColor: 'bg-yellow-100' },
   food: { icon: 'uil:crockery', color: 'text-red-500', bgColor: 'bg-red-100' },
   transport: { icon: 'uil:car-sideview', color: 'text-blue-500', bgColor: 'bg-blue-100' },
   entertainment: { icon: 'uil:ticket', color: 'text-purple-500', bgColor: 'bg-purple-100' },
