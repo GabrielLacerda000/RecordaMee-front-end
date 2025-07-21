@@ -65,6 +65,13 @@ export const AuthRepository = {
         const userStore = useAuthStore()
         userStore.setUser(null)
 
+        const toast = useToast()
+
+        toast.add({
+          title: 'Logout realizado com sucesso!',
+          color: 'success',
+        })
+
         navigateTo('/login')
 
         } catch (error: any) {

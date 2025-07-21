@@ -32,7 +32,6 @@ const form = reactive<Partial<Schema>>({
 
 const toast = useToast()
 
-
 const handleLogin = async (event: FormSubmitEvent<Schema>) => {
   try {
     await AuthRepository.login(event.data)
