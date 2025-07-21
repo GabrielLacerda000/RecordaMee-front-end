@@ -46,11 +46,11 @@ const formatCurrency = (value: number) => {
 
       <div class="flex justify-between items-center p-3 rounded-lg bg-white shadow-md min-w-[250px]">
         <div class="flex flex-col text-black">
-          <p class="text-md">Total Restante:</p>
+          <p class="text-md">Total Pendente:</p>
           <span class="text-xl font-bold">{{ formatCurrency(summary?.totalPending || 0) }}</span>
         </div>
-        <div class="w-12 h-12 rounded-full bg-red-200 flex items-center justify-center">
-          <Icon name="material-symbols:money-off" class="text-red-600" size="2em" />
+        <div class="w-12 h-12 rounded-full bg-yellow-200 flex items-center justify-center">
+          <Icon name="material-symbols:calendar-today-outline" class="text-yellow-600" size="2em" />
         </div>
       </div>
     </div>
