@@ -29,8 +29,8 @@ const formatCurrency = (value: number) => {
           <span class="text-xl font-bold">{{ formatCurrency(summary?.total || 0) }}</span>
         </div>
 
-        <div class="w-12 h-12 rounded-full bg-[#2E7D32] flex items-center justify-center">
-          <Icon name="material-symbols:attach-money" style="color: white" size="2em" />
+        <div class="w-12 h-12 rounded-full bg-[#1CDD43] flex items-center justify-center">
+          <Icon name="material-symbols:attach-money" style="color: black" size="2em" />
         </div>
       </div>
       

@@ -6,18 +6,22 @@ const props = defineProps({
   },
   variant: {
     type: String,
-    default: 'primary',
+    default: "primary",
+  },
+  icon: {
+    type: String,
+    default: "",
   },
 });
 
 const getVariantClass = () => {
   switch (props.variant) {
-    case 'primary':
-      return 'bg-[#01C38D] hover:bg-[#01a87a]';
-    case 'secondary':
-      return 'bg-black hover:bg-gray-800';
+    case "primary":
+      return "bg-[#1CDD43] hover:bg-[#16B037]";
+    case "secondary":
+      return "bg-black hover:bg-gray-800";
     default:
-      return 'bg-[#01C38D] hover:bg-[#01a87a]';
+      return "bg-[#01C38D] hover:bg-[#01a87a]";
   }
 };
 </script>
@@ -25,10 +29,11 @@ const getVariantClass = () => {
 <template>
   <button
     :class="[
-      'w-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-300 cursor-pointer',
+      'w-full text-black font-bold py-2 px-4 rounded-xl focus:outline-none focus:shadow-outline transition-colors duration-300 cursor-pointer flex items-center   justify-center gap-2',
       getVariantClass(),
     ]"
   >
-    {{ text }}
+    <Icon v-if="icon" :name="icon" size="1.5em" />
+    <span>{{ text }}</span>
   </button>
 </template>
