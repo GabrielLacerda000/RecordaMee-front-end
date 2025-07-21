@@ -24,7 +24,7 @@ const expenses = computed(() => expenseStore.expenses);
       </div>
 
       <div>
-        <ButtonsBtn text="Adicionar despesa" type="submit" icon="tabler:circle-plus"/>
+        <FormAddExpenseForm />
       </div>
     </div>
     <div v-for="expense in expenses" :key="expense.id">
