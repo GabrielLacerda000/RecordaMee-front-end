@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { AuthRepository } from '~/repositories/authRepository';
-
-
 </script>
 
 <template>
