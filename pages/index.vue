@@ -33,6 +33,7 @@ const expenses = computed(() => expenseStore.expenses);
     </div>
     <div v-for="expense in expenses" :key="expense.id">
       <CardExpenseCard 
+        :id="expense.id"
         :name="expense.name"
         :createdAt="expense.created_at"
         :value="expense.amount"
