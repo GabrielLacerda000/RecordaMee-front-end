@@ -4,29 +4,29 @@ import type { FormSubmitEvent } from '#ui/types'
 import { ExpenseRepository } from '~/repositories/expense/ExpenseRepository'
 
 const categories = [
-  { value: 1, label: 'Housing' },
-  { value: 2, label: 'Utilities' },
-  { value: 3, label: 'Food' },
-  { value: 4, label: 'Transport' },
-  { value: 5, label: 'Entertainment' },
-  { value: 6, label: 'Health' },
-  { value: 7, label: 'Education' },
-  { value: 8, label: 'Other' }
+  { value: 1, label: 'Moradia' },
+  { value: 2, label: 'Serviços' },
+  { value: 3, label: 'Alimentação' },
+  { value: 4, label: 'Transporte' },
+  { value: 5, label: 'Lazer' },
+  { value: 6, label: 'Saúde' },
+  { value: 7, label: 'Educação' },
+  { value: 8, label: 'Outros' }
 ]
 
 const statuses = [
-  { value: 1, label: 'paid' },
-  { value: 2, label: 'pending' },
-  { value: 3, label: 'overdue' }
+  { value: 1, label: 'pago' },
+  { value: 2, label: 'pendente' },
+  { value: 3, label: 'vencido' }
 ]
 
 const recurrences = [
-  { value: 1, label: 'unique' },
-  { value: 2, label: 'daily' },
-  { value: 3, label: 'weekly' },
-  { value: 4, label: 'monthly' },
-  { value: 5, label: 'bianual' },
-  { value: 6, label: 'semester' }
+  { value: 1, label: 'único' },
+  { value: 2, label: 'diário' },
+  { value: 3, label: 'semanal' },
+  { value: 4, label: 'mensal' },
+  { value: 5, label: 'bimestral' },
+  { value: 6, label: 'semestral' }
 ]
 
 const schema = z.object({
@@ -51,8 +51,6 @@ const form = reactive({
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   await ExpenseRepository.addExpense(event.data)
-
-  console.log(event.data)
 }
 </script>
 
