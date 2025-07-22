@@ -80,7 +80,7 @@ const statusText = computed(() => {
 const statusClass = computed(() => {
   const map = {
     paid: 'bg-green-200  text-[#2E7D32]',
-    pending: 'bg-yellow-200 text-yellow-500',
+    pending: 'bg-yellow-200 text-yellow-600',
     overdue: 'bg-red-200 text-red-500',
   };
   return map[status.value] || 'bg-gray-200 text-gray-500';
