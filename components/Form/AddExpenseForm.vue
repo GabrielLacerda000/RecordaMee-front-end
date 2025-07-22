@@ -27,14 +27,13 @@ const recurrences = [
   { value: 5, label: 'semester' }
 ]
 
-
 const schema = z.object({
-  name: z.string().min(3, 'Must be at least 3 characters'),
-  amount: z.number().positive('Must be a positive number'),
-  due_date: z.string(),
-  category_id: z.number(),
-  status_id: z.number(),
-  recurrence_id: z.number(),
+  name: z.string('O campo nome é obrigatório').min(3, 'O campo nome deve conter pelo menos 3 caracteres'),
+  amount: z.number('O campo valor é obrigatório').positive('O campo valor deve ser positivo'),
+  due_date: z.string('O campo data é obrigatório'),
+  category_id: z.number('O campo categoria é obrigatório'),
+  status_id: z.number('O campo status é obrigatório'),
+  recurrence_id: z.number('O campo recorrência é obrigatório'),
 })
 
 type Schema = z.output<typeof schema>
@@ -48,47 +47,51 @@ const form = reactive({
   recurrence_id: undefined,
 })
 
-async function onSubmit (event: FormSubmitEvent<Schema>) {
-  // Do something with event.data
+async function onSubmit(event: FormSubmitEvent<Schema>) {
   console.log(event.data)
 }
 </script>
 
 <template>
-<UModal>
-        <ButtonsBtn text="Adicionar despesa" type="submit" icon="tabler:circle-plus"/>
+  <UModal title="Adicionar Nova Despesa">
+    <ButtonsBtn text="Adicionar despesa" type="submit" icon="tabler:circle-plus" />
 
-        <template #content>
-            <div class="max-h-[80vh] overflow-y-auto p-7">
-                <h2 class="text-lg font-bold mb-4 text-white">Adicionar Nova Despesa</h2>
-                <UForm :schema="schema" :state="form" class="space-y-4" @submit="onSubmit">
-                    <UFormField label="Nome" name="name">
-                        <UInput v-model="form.name" />
-                    </UFormField>
-    
-                    <UFormField label="Valor" name="amount">
-                        <UInput v-model="form.amount" type="number" />
-                    </UFormField>
-    
-                    <UFormField label="Data de Vencimento" name="due_date">
-                        <UInput v-model="form.due_date" type="date" />
-                    </UFormField>
-    
-                    <UFormField label="Categoria" name="category_id">
-                        <USelect v-model="form.category_id" :options="categories" />
-                    </UFormField>
-    
-                    <UFormField label="Status" name="status_id">
-                        <USelect v-model="form.status_id" :options="statuses" />
-                    </UFormField>
-    
-                    <UFormField label="Recorrência" name="recurrence_id">
-                        <USelect v-model="form.recurrence_id" :options="recurrences" />
-                    </UFormField>
-    
-                    <ButtonsBtn type="submit" text="Salvar" />
-                </UForm>
-            </div>
-        </template>
-</UModal>
+    <template #body>
+      <div class="max-h-[80vh] overflow-y-auto p-7">
+
+        <UForm :schema="schema" :state="form" @submit="onSubmit" class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <UFormField label="Nome" name="name">
+              <UInput v-model="form.name" />
+            </UFormField>
+
+            
+            <UFormField label="Valor" name="amount">
+                <UInput v-model="form.amount" type="number" class="w-40" />
+            </UFormField>
+            
+            <UFormField label="Data de Vencimento" name="due_date">
+                <UInput v-model="form.due_date" type="date" class="w-40" />
+            </UFormField>
+            
+            <UFormField label="Categoria" name="category_id">
+              <USelect v-model="form.category_id" :items="categories" class="w-40"/>
+            </UFormField>
+
+            <UFormField label="Status" name="status_id">
+              <USelect v-model="form.status_id" :items="statuses" class="w-40"/>
+            </UFormField>
+
+            <UFormField label="Recorrência" name="recurrence_id">
+              <USelect v-model="form.recurrence_id" :items="recurrences" class="w-40"/>
+            </UFormField>
+          </div>
+
+          <div class="flex justify-end">
+            <ButtonsBtn type="submit" text="Salvar" />
+          </div>
+        </UForm>
+      </div>
+    </template>
+  </UModal>
 </template>
