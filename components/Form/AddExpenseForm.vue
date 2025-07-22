@@ -54,7 +54,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
 <template>
   <UModal title="Adicionar Nova Despesa">
-    <ButtonsBtn text="Adicionar despesa" type="submit" icon="tabler:circle-plus" />
+    <ButtonsBtn text="Adicionar despesa" type="subtle" icon="tabler:circle-plus" />
 
     <template #body>
       <div class="max-h-[80vh] overflow-y-auto p-7">

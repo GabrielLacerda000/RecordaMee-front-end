@@ -89,7 +89,7 @@ const statusClass = computed(() => {
 </script>
 
 <template>
-  <div class="bg-[#171717] rounded-xl p-4 my-3 border border-[#2e2f2f] flex items-center justify-between shadow-md">
+  <div class="bg-[#262626] rounded-xl p-4 my-3 border border-[#2e2f2f] flex items-center justify-between shadow-md">
     <div class="flex items-center text-white">
       <div :class="`flex items-center justify-center ${categoryBgColor} p-3 rounded-xl`">
         <Icon :name="categoryIcon" :class="`${categoryColor}`" :style="`color: ${categoryColor}`" size="2em" />

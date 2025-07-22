@@ -9,13 +9,12 @@ export default {
         roboto: ['Roboto', 'sans-serif'],
       },
       colors: {
-        'gray-primary': '#F5F5F5',
-        'white-primary': '#FFFFFF',
-        'green-primary': '#2E7D32',
-        primary: {
-          default: '#01C38D',    
-          dark: '#132d46',       
-          light: '#F5F5F5'      
+        'green-primary': '#1DFE69',
+        'green-secondary': '#1DFEAD',
+        'white-primary': '#F5F5F5',
+        dark: {
+          default: '#1A1A1A',           
+          light: '#262626'      
         },
         success: '#2E7D32',     
         white: '#FFFFFF',  

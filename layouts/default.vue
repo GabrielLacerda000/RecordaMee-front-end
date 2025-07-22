@@ -3,7 +3,7 @@ import Sidebar from '~/components/layout/Sidebar.vue';
 </script>
 
 <template>
-  <div class="w-full min-h-screen bg-[#0a0a0a] flex">
+  <div class="w-full min-h-screen bg-[#1A1A1A] flex">
     <Sidebar />
     <div class="flex-1 flex flex-col">
       <LayoutHeader />

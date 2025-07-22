@@ -53,9 +53,9 @@ const handleLogin = async (event: FormSubmitEvent<Schema>) => {
 </script>
 
 <template>
-  <div class="bg-[#F5F5F5] min-h-screen flex items-center justify-center">
-    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-      <h1 class="text-2xl font-bold text-center mb-8 text-black">RecordaMe</h1>
+  <div class="bg-green-secondary min-h-screen flex items-center justify-center">
+    <div class=" p-8 rounded-lg shadow-md w-full max-w-md">
+      <h1 class="text-2xl font-bold text-center mb-8 text-[#F5F5F5]">RecordaMe</h1>
 
       <UForm :schema="schema" :state="form" @submit="handleLogin">
         <UFormField label="Email" name="email">
@@ -63,7 +63,7 @@ const handleLogin = async (event: FormSubmitEvent<Schema>) => {
             id="email"
             v-model="form.email"
             type="email"
-            class="border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            class="border rounded w-full py-2 px-3 text-[#F5F5F5] leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Digite seu email"
           />
         </UFormField>

@@ -17,7 +17,7 @@ const props = defineProps({
 const getVariantClass = () => {
   switch (props.variant) {
     case "primary":
-      return "bg-[#1CDD43] hover:bg-[#16B037]";
+      return "bg-gradient-to-br from-[#1DFEAD] to-[#1DFE69]";
     case "secondary":
       return "bg-black hover:bg-gray-800";
     default:
