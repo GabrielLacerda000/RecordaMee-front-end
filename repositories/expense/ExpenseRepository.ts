@@ -91,7 +91,6 @@ export const ExpenseRepository = {
     },
 
     async deleteExpense(id: number) {
-        console.log('Deleting expense with ID:', id);
         try {
             const { data, error } = await useDelete<ApiResponse<null>>(`/expenses/delete/${id}`);
 

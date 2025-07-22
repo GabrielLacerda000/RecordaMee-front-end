@@ -93,7 +93,6 @@ const statusClass = computed(() => {
 
 async function handleDelete() {
   if (confirm('Tem certeza que deseja deletar esta despesa?')) {
-    console.log('Deleting expense with ID:', props.id);
     await ExpenseRepository.deleteExpense(props.id);
   }
 }
