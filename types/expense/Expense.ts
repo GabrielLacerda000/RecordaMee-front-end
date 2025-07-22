@@ -27,8 +27,9 @@ export type Expense = {
     recurrence: Recurrence;
 }
 
-export type AddExpensePayload = Omit<Expense, 'id' | 'user_id' | 'created_at' | 'updated_at' | 'category' | 'status' | 'recurrence'> & {
+export type AddExpensePayload = Omit<Expense, 'id' | 'user_id' | 'created_at' | 'updated_at' | 'category' | 'status' | 'recurrence' | 'payment_date'> & {
     category_id: number;
     status_id: number;
     recurrence_id: number;
+    payment_date?: string | null;
 };

@@ -3,6 +3,8 @@ import type { ApiResponse } from "~/types/api/api";
 import type { AddExpensePayload, Expense } from "~/types/expense/Expense";
 import type { Summary } from "~/types/expense/Sumary";
 
+const toast = useToast()
+
 export const ExpenseRepository = {
     async getExpenses() {
         try {
@@ -49,19 +51,36 @@ export const ExpenseRepository = {
 
     async addExpense(payload: AddExpensePayload) {
         try {
-            const { data, error } = await usePost<ApiResponse<Expense>>('/expenses/create', payload);
+            const { data, error } = await usePost<ApiResponse<Expense>>('/expenses/create', {
+                body: payload
+            });
 
             if (error.value) {
+                toast.add({
+                  title: 'Erro ao criar despesa',
+                  description: error.value.message,
+                  color: 'error',
+                })
                 throw new Error(error.value.message || 'Erro na requisição');
             }
 
             if (data.value?.status === 'error') {
+                toast.add({
+                  title: 'Erro ao criar despesa',
+                  description: data.value.message,
+                  color: 'error',
+                })
                 throw new Error(data.value.message || 'Erro na requisição ao adicionar despesa');
             }
 
             if (data.value?.data) {
                 const expenseStore = useExpenseStore();
+
                 expenseStore.addExpense(data.value.data);
+
+                toast.add({
+                  title: 'Despesa criada com sucesso!',
+                })
             }
 
         } catch (error: any) {

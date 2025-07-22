@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { z } from 'zod'
 import type { FormSubmitEvent } from '#ui/types'
+import { ExpenseRepository } from '~/repositories/expense/ExpenseRepository'
 
 const categories = [
   { value: 1, label: 'Housing' },
@@ -20,11 +21,12 @@ const statuses = [
 ]
 
 const recurrences = [
-  { value: 1, label: 'daily' },
-  { value: 2, label: 'weekly' },
-  { value: 3, label: 'monthly' },
-  { value: 4, label: 'bianual' },
-  { value: 5, label: 'semester' }
+  { value: 1, label: 'unique' },
+  { value: 2, label: 'daily' },
+  { value: 3, label: 'weekly' },
+  { value: 4, label: 'monthly' },
+  { value: 5, label: 'bianual' },
+  { value: 6, label: 'semester' }
 ]
 
 const schema = z.object({
@@ -48,6 +50,8 @@ const form = reactive({
 })
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
+  await ExpenseRepository.addExpense(event.data)
+
   console.log(event.data)
 }
 </script>

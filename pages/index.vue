@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ExpenseRepository } from '~/repositories/expense/ExpenseRepository';
 import { useExpenseStore } from '~/store/useExpenseStore';
 
 useSeoMeta({
@@ -10,12 +11,20 @@ definePageMeta({
   middleware: ['auth']
 })
 
+
+try {
+  await ExpenseRepository.getExpenses()
+  
+} catch (e) {
+  console.error('Erro ao buscar despesas:', e)
+}
 const expenseStore = useExpenseStore();
 
 const expenses = computed(() => expenseStore.expenses);
+
 </script>
 
-<template>
+<template> 
   <div>
     <div class="flex items-center justify-between mb-4 mx-4">
       <div>
