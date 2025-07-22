@@ -1,14 +1,13 @@
-export function catchRepositoryExceptions(error: any, genericError: string) {
-  
-  const toast = useToast()
+export const catchRepositoryExceptions = (error: any, defaultMessage: string) => {
+    const toast = useToast();
 
-  const errorMenssage = error.response.data.message || error.response.data.errors[0].message || genericError
+    const message = error?.response?._data?.message || error?.message || defaultMessage;
 
-  toast.add({
-    title: 'Erro ao fazer login',
-    description: errorMenssage,
-    color: 'error'
-  })
+    toast.add({
+        title: 'Erro',
+        description: message,
+        color: 'error',
+    });
 
-  throw error
-}
+    throw new Error(message);
+};
