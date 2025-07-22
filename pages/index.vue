@@ -11,13 +11,8 @@ definePageMeta({
   middleware: ['auth']
 })
 
+await ExpenseRepository.getExpenses()
 
-try {
-  await ExpenseRepository.getExpenses()
-  
-} catch (e) {
-  console.error('Erro ao buscar despesas:', e)
-}
 const expenseStore = useExpenseStore();
 
 const expenses = computed(() => expenseStore.expenses);

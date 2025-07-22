@@ -108,7 +108,7 @@ const statusClass = computed(() => {
       </div>
 
       <div class="mx-3">
-        <UBadge  variant="soft" :class="statusClass">{{ statusText }}</UBadge>
+        <UBadge variant="soft" :class="statusClass">{{ statusText }}</UBadge>
       </div>
 
       <div class="flex gap-3">

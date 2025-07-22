@@ -51,6 +51,8 @@ export const ExpenseRepository = {
 
     async addExpense(payload: AddExpensePayload) {
         try {
+            const expenseStore = useExpenseStore();
+
             const { data, error } = await usePost<ApiResponse<Expense>>('/expenses/create', {
                 body: payload
             });
@@ -74,12 +76,52 @@ export const ExpenseRepository = {
             }
 
             if (data.value?.data) {
-                const expenseStore = useExpenseStore();
-
                 expenseStore.addExpense(data.value.data);
 
                 toast.add({
                   title: 'Despesa criada com sucesso!',
+                  color: 'success',
+                })
+            }
+
+        } catch (error: any) {
+            console.error('Erro ao adicionar despesa:', error);
+            catchRepositoryExceptions(error, 'Erro ao adicionar despesa. Por favor, tente novamente.')
+        }
+    },
+
+    async deleteExpense(id: number) {
+        try {
+            const expenseStore = useExpenseStore();
+
+            const { data, error } = await usePost<ApiResponse<Expense>>('/expenses/delete', {
+                body: id
+            });
+
+            if (error.value) {
+                toast.add({
+                  title: 'Erro ao criar despesa',
+                  description: error.value.message,
+                  color: 'error',
+                })
+                throw new Error(error.value.message || 'Erro na requisição');
+            }
+
+            if (data.value?.status === 'error') {
+                toast.add({
+                  title: 'Erro ao criar despesa',
+                  description: data.value.message,
+                  color: 'error',
+                })
+                throw new Error(data.value.message || 'Erro na requisição ao adicionar despesa');
+            }
+
+            if (data.value?.data) {
+                expenseStore.addExpense(data.value.data);
+
+                toast.add({
+                  title: 'Despesa criada com sucesso!',
+                  color: 'success',
                 })
             }
 

@@ -49,8 +49,8 @@ const form = reactive({
   recurrence_id: undefined,
 })
 
-async function onSubmit(event: FormSubmitEvent<Schema>) {
-  await ExpenseRepository.addExpense(event.data)
+async function onSubmit({ data }: FormSubmitEvent<Schema>) {
+  await ExpenseRepository.addExpense(data)
 }
 </script>
 
@@ -69,23 +69,23 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 
             
             <UFormField label="Valor" name="amount">
-                <UInput v-model="form.amount" type="number" class="w-40" />
+                <UInput v-model="form.amount" type="number" class="w-full" />
             </UFormField>
             
             <UFormField label="Data de Vencimento" name="due_date">
-                <UInput v-model="form.due_date" type="date" class="w-40" />
+                <UInput v-model="form.due_date" type="date" class="w-full" />
             </UFormField>
             
             <UFormField label="Categoria" name="category_id">
-              <USelect v-model="form.category_id" :items="categories" class="w-40"/>
+              <USelect v-model="form.category_id" :items="categories" class="w-full"/>
             </UFormField>
 
             <UFormField label="Status" name="status_id">
-              <USelect v-model="form.status_id" :items="statuses" class="w-40"/>
+              <USelect v-model="form.status_id" :items="statuses" class="w-full"/>
             </UFormField>
 
             <UFormField label="Recorrência" name="recurrence_id">
-              <USelect v-model="form.recurrence_id" :items="recurrences" class="w-40"/>
+              <USelect v-model="form.recurrence_id" :items="recurrences" class="w-full"/>
             </UFormField>
           </div>
 
