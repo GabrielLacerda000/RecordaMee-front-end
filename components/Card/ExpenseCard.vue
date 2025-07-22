@@ -2,8 +2,13 @@
 import { computed } from 'vue';
 import formatCurrency from '~/utils/format/formatCurrency';
 import formatDate from '~/utils/format/formatDate';
+import { ExpenseRepository } from '~/repositories/expense/ExpenseRepository';
 
 const props = defineProps({
+  id: {
+    type: Number,
+    required: true,
+  },
   name: {
     type: String,
     required: true,
@@ -86,6 +91,12 @@ const statusClass = computed(() => {
   return map[status.value] || 'bg-gray-200 text-gray-500';
 });
 
+async function handleDelete() {
+  if (confirm('Tem certeza que deseja deletar esta despesa?')) {
+    await ExpenseRepository.deleteExpense(props.id);
+  }
+}
+
 </script>
 
 <template>
@@ -119,7 +130,7 @@ const statusClass = computed(() => {
         </div>
 
         <div class="bg-black hover:bg-black/5 transition-colors duration-300 h-10 w-10 p-2 rounded-xl">
-          <button>
+          <button @click="handleDelete">
             <Icon name="uil:trash-alt" class="text-red-400 hover:text-red-500 transition-colors duration-300 cursor-pointer" size="1.5em" />
           </button>
         </div>

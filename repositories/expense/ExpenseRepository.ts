@@ -92,15 +92,11 @@ export const ExpenseRepository = {
 
     async deleteExpense(id: number) {
         try {
-            const expenseStore = useExpenseStore();
-
-            const { data, error } = await usePost<ApiResponse<Expense>>('/expenses/delete', {
-                body: id
-            });
+            const { data, error } = await useDelete<ApiResponse<null>>(`/expenses/delete/${id}`);
 
             if (error.value) {
                 toast.add({
-                  title: 'Erro ao criar despesa',
+                  title: 'Erro ao deletar despesa',
                   description: error.value.message,
                   color: 'error',
                 })
@@ -109,25 +105,24 @@ export const ExpenseRepository = {
 
             if (data.value?.status === 'error') {
                 toast.add({
-                  title: 'Erro ao criar despesa',
+                  title: 'Erro ao deletar despesa',
                   description: data.value.message,
                   color: 'error',
                 })
-                throw new Error(data.value.message || 'Erro na requisição ao adicionar despesa');
+                throw new Error(data.value.message || 'Erro na requisição ao deletar despesa');
             }
 
-            if (data.value?.data) {
-                expenseStore.addExpense(data.value.data);
+            const expenseStore = useExpenseStore();
+            expenseStore.removeExpense(id);
 
-                toast.add({
-                  title: 'Despesa criada com sucesso!',
-                  color: 'success',
-                })
-            }
+            toast.add({
+              title: 'Despesa deletada com sucesso!',
+              color: 'success',
+            })
 
         } catch (error: any) {
-            console.error('Erro ao adicionar despesa:', error);
-            catchRepositoryExceptions(error, 'Erro ao adicionar despesa. Por favor, tente novamente.')
+            console.error('Erro ao deletar despesa:', error);
+            catchRepositoryExceptions(error, 'Erro ao deletar despesa. Por favor, tente novamente.')
         }
     }
 }

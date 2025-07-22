@@ -11,12 +11,17 @@ export const useExpenseStore = defineStore('expense', () => {
 
    const setExpenses = (newExpenses: Expense[]) => expenses.value = newExpenses
 
+   const removeExpense = (id: number) => {
+    expenses.value = expenses.value.filter(expense => expense.id !== id)
+   }
+
   return {
     expenses,
     expense,
     addExpense,
     setExpenses,
     setExpense,
+    removeExpense,
   }
 
 })
