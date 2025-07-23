@@ -3,6 +3,7 @@ import { computed } from 'vue';
 import formatCurrency from '~/utils/format/formatCurrency';
 import formatDate from '~/utils/format/formatDate';
 import { ExpenseRepository } from '~/repositories/expense/ExpenseRepository';
+import { string } from 'zod';
 
 const props = defineProps({
   id: {
@@ -33,6 +34,11 @@ const props = defineProps({
     type: Boolean,
     required: true,
   },
+  status: {
+    type: Object as PropType<{ id: number; name: string }>,
+    required: true,
+},
+
 });
 
 const categoryMap: { [key: string]: { icon: string; color: string , bgColor: string } } = {
@@ -60,21 +66,10 @@ const categoryBgColor = computed(() => {
   return categoryMap[categoryKey.value]?.bgColor || 'gray';
 });
 
-const status = computed(() => {
-  if (props.paid) {
-    return 'paid';
-  }
-  const today = new Date();
-  const dueDate = new Date(props.dueDate);
-  today.setHours(0, 0, 0, 0);
-  if (dueDate < today) {
-    return 'overdue';
-  }
-  return 'pending';
-});
+const status = computed(() => props.status.name.toLowerCase());
 
 const statusText = computed(() => {
-  const map = {
+  const map: Record<string, string> = {
     paid: 'Pago',
     pending: 'Pendente',
     overdue: 'Vencido',
@@ -83,13 +78,14 @@ const statusText = computed(() => {
 });
 
 const statusClass = computed(() => {
-  const map = {
-    paid: 'bg-green-200  text-[#2E7D32]',
+  const map: Record<string, string> = {
+    paid: 'bg-green-200 text-[#2E7D32]',
     pending: 'bg-yellow-200 text-yellow-600',
     overdue: 'bg-red-200 text-red-500',
   };
   return map[status.value] || 'bg-gray-200 text-gray-500';
 });
+
 
 async function handleDelete() {
   if (confirm('Tem certeza que deseja deletar esta despesa?')) {

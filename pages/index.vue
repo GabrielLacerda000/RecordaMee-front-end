@@ -40,6 +40,7 @@ const expenses = computed(() => expenseStore.expenses);
         :dueDate="expense.due_date"
         :category="expense.category.name"
         :paid="!!expense.payment_date"
+        :status="expense.status"
       />
     </div>
   </div>
