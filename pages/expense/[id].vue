@@ -66,6 +66,12 @@ async function onSubmit({ data }: FormSubmitEvent<Schema>) {
 </script>
 
 <template>
+    <div class="flex items-center justify-center relative p-4">
+        <NuxtLink to="/" class="absolute left-4 top-1/2 -translate-y-1/2 bg-gray-800 rounded-full p-2 transition-colors hover:bg-gray-700 flex items-center justify-center w-10 h-10">
+            <Icon name="material-symbols:arrow-back" class="text-white" size="1.5em" />
+        </NuxtLink>
+        <h1 class="text-2xl text-white">Editar Despesa</h1>
+    </div>
     <div class="flex justify-center items-center h-full p-7">
         <div class="w-full max-w-2xl">
             <UForm :schema="schema" :state="form" @submit="onSubmit" class="space-y-6">
