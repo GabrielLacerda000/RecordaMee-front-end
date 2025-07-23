@@ -119,11 +119,13 @@ async function handleDelete() {
       </div>
 
       <div class="flex gap-3">
-        <div class="bg-black p-2 h-10 w-10 rounded-xl hover:bg-black/5 transition-colors duration-300 ">
-          <button class="mb-2">
-            <Icon name="uil:edit" class="text-[#F5F5F5] hover:text-[#404040] transition-colors duration-300 cursor-pointer" size="1.5em" />
-          </button>
-        </div>
+        <NuxtLink :to="`/expense/${id}`">
+          <div class="bg-black p-2 h-10 w-10 rounded-xl hover:bg-black/5 transition-colors duration-300 ">
+            <button class="mb-2">
+              <Icon name="uil:edit" class="text-[#F5F5F5] hover:text-[#404040] transition-colors duration-300 cursor-pointer" size="1.5em" />
+            </button>
+          </div>
+        </NuxtLink>
 
         <div class="bg-black hover:bg-black/5 transition-colors duration-300 h-10 w-10 p-2 rounded-xl">
           <button @click="handleDelete">
