@@ -5,6 +5,7 @@ import type { Summary } from "~/types/expense/Sumary";
 
 const toast = useToast()
 
+
 export const ExpenseRepository = {
     async getExpenses() {
         try {
@@ -110,6 +111,46 @@ export const ExpenseRepository = {
         } catch (error: any) {
             console.error('Erro ao adicionar despesa:', error);
             catchRepositoryExceptions(error, 'Erro ao adicionar despesa. Por favor, tente novamente.')
+        }
+    },
+
+    async updateExpense(id: number, payload: AddExpensePayload) {
+        try {
+            const { data, error } = await usePut<ApiResponse<Expense>>(`/expenses/update/${id}`, {
+                body: payload
+            });
+
+            if (error.value) {
+                toast.add({
+                    title: 'Erro ao atualizar despesa',
+                    description: error.value.message,
+                    color: 'error',
+                })
+                throw new Error(error.value.message || 'Erro na requisição');
+            }
+
+            if (data.value?.status === 'error') {
+                toast.add({
+                    title: 'Erro ao atualizar despesa',
+                    description: data.value.message,
+                    color: 'error',
+                })
+                throw new Error(data.value.message || 'Erro na requisição ao atualizar despesa');
+            }
+
+            if (data.value?.data) {
+                const expenseStore = useExpenseStore();
+                expenseStore.setExpense(data.value.data);
+
+                toast.add({
+                    title: 'Despesa atualizada com sucesso!',
+                    color: 'success',
+                })
+            }
+
+        } catch (error: any) {
+            console.error('Erro ao atualizar despesa:', error);
+            catchRepositoryExceptions(error, 'Erro ao atualizar despesa. Por favor, tente novamente.')
         }
     },
 

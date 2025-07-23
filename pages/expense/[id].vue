@@ -11,7 +11,6 @@ const id = Number(route.params.id);
 await ExpenseRepository.getExpense(id);
 
 const expense = computed(() => expenseStore.expense);
-console.log('Expense:', expense.value);
 
 const categories = [
   { value: 1, label: 'Moradia' },
@@ -59,8 +58,10 @@ const form = reactive({
   recurrence_id: expense.value?.recurrence.id,
 })
 
+
 async function onSubmit({ data }: FormSubmitEvent<Schema>) {
-  // await ExpenseRepository.addExpense(data)
+  await ExpenseRepository.updateExpense(id, data)
+  navigateTo('/')
 }
 </script>
 
