@@ -70,8 +70,8 @@ async function onSubmit({ data }: FormSubmitEvent<Schema>) {
         <div class="w-full max-w-2xl">
             <UForm :schema="schema" :state="form" @submit="onSubmit" class="space-y-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <UFormField label="Nome" name="name">
-                        <UInput v-model="form.name" />
+                    <UFormField label="Nome" name="name" >
+                        <UInput v-model="form.name" class="w-full"/>
                     </UFormField>
                     <UFormField label="Valor" name="amount">
                         <UInput v-model="form.amount" type="number" class="w-full" />
