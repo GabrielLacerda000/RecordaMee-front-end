@@ -27,6 +27,29 @@ export const ExpenseRepository = {
 
         }
     },
+    async getExpense(id: number) {
+        try {
+            const { data, error } = await useGet<ApiResponse<Expense>>(`/expenses/show/${id}`);
+
+            if (error.value) {
+                throw new Error(error.value.message || 'Erro na requisição');
+            }
+
+            if (data.value?.status === 'error') {
+                throw new Error(data.value.message || 'Erro na requisição ao buscar despesa');
+            }
+            
+            const expenseStore = useExpenseStore();
+            if (data.value?.data) {
+                expenseStore.setExpense(data.value.data);
+            }
+
+        } catch (error: any) {
+            console.error('Erro ao buscar despesa:', error);
+            catchRepositoryExceptions(error, 'Erro ao buscar despesa. Por favor, tente novamente.')
+
+        }
+    },
 
     async getSummary() {
         try {
