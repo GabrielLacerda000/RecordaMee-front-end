@@ -19,7 +19,7 @@ const getVariantClass = () => {
     case "primary":
       return "bg-gradient-to-br from-[#1DFEAD] to-[#1DFE69] hover:from-[#18E05E] hover:to-[#18E09F]";
     case "secondary":
-      return "bg-black hover:bg-gray-800";
+      return "bg-black hover:bg-[#2e2f2f] text-white";
     default:
       return "bg-[#01C38D] hover:bg-[#01a87a]";
   }

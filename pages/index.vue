@@ -11,11 +11,21 @@ definePageMeta({
   middleware: ['auth']
 })
 
-await ExpenseRepository.getExpenses()
+await Promise.all([
+  ExpenseRepository.getExpenses(),
+  ExpenseRepository.getUpcomingExpenses(),
+])
 
 const expenseStore = useExpenseStore();
 
 const expenses = computed(() => expenseStore.expenses);
+const upcomingExpenses = computed(() => expenseStore.upcomingExpenses);
+
+const activeTab = ref('myExpenses');
+
+const displayedExpenses = computed(() => {
+  return activeTab.value === 'myExpenses' ? expenses.value : upcomingExpenses.value;
+});
 
 </script>
 
@@ -31,7 +41,21 @@ const expenses = computed(() => expenseStore.expenses);
         <FormAddExpenseForm />
       </div>
     </div>
-    <div v-for="expense in expenses" :key="expense.id">
+
+    <div class="flex gap-4 mx-4 mb-4">
+      <ButtonsBtn
+        text="Minhas despesas"
+        @click="activeTab = 'myExpenses'"
+        :variant="activeTab === 'myExpenses' ? 'primary' : 'secondary'"
+      />
+      <ButtonsBtn
+        text="Próximas despesas"
+        @click="activeTab = 'upcomingExpenses'"
+        :variant="activeTab === 'upcomingExpenses' ? 'primary' : 'secondary'"
+      />
+    </div>
+
+    <div v-for="expense in displayedExpenses" :key="expense.id">
       <CardExpenseCard 
         :id="expense.id"
         :name="expense.name"
@@ -41,6 +65,7 @@ const expenses = computed(() => expenseStore.expenses);
         :category="expense.category.name"
         :paid="!!expense.payment_date"
         :status="expense.status"
+        :show-actions="activeTab === 'myExpenses'"
       />
     </div>
   </div>

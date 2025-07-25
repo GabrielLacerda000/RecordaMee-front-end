@@ -37,8 +37,11 @@ const props = defineProps({
   status: {
     type: Object as PropType<{ id: number; name: string }>,
     required: true,
-},
-
+  },
+  showActions: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const categoryMap: { [key: string]: { icon: string; color: string , bgColor: string } } = {
@@ -118,7 +121,7 @@ async function handleDelete() {
         <UBadge variant="soft" :class="statusClass">{{ statusText }}</UBadge>
       </div>
 
-      <div class="flex gap-3">
+      <div class="flex gap-3" v-if="showActions">
         <NuxtLink :to="`/expense/${id}`">
           <div class="bg-black p-2 h-10 w-10 rounded-xl hover:bg-black/5 transition-colors duration-300 ">
             <button class="mb-2">
