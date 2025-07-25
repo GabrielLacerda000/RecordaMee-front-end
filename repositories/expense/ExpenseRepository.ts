@@ -194,10 +194,35 @@ export const ExpenseRepository = {
         try {
             const { data, error } = await useGet<ApiResponse<Expense[]>>('/expenses/recurrences');
 
-            return data;
+            if (error.value) {
+                toast.add({
+                  title: 'Erro ao deletar despesa',
+                  description: error.value.message,
+                  color: 'error',
+                })
+                throw new Error(error.value.message || 'Erro na requisição');
+            }
+
+            if (data.value?.status === 'error') {
+                toast.add({
+                  title: 'Erro ao deletar despesa',
+                  description: data.value.message,
+                  color: 'error',
+                })
+                throw new Error(data.value.message || 'Erro na requisição ao buscars despesas');
+            }
+
+            const expenseStore = useExpenseStore();
+            expenseStore.setUpcomingExpenses(data.value?.data || []);
+
+             toast.add({
+              title: 'Despesad buscadas com sucesso!',
+              color: 'success',
+            })
+
         } catch (error: any) {
             console.error('Erro ao buscar despesas por categoria:', error);
-            catchRepositoryExceptions(error, 'Erro ao buscar despesas por categoria. Por favor, tente novamente.')
+            catchRepositoryExceptions(error, 'Erro ao buscar próximas despesas. Por favor, tente novamente.')
         }
     }
 }
