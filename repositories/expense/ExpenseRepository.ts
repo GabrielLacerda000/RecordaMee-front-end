@@ -188,5 +188,16 @@ export const ExpenseRepository = {
             console.error('Erro ao deletar despesa:', error);
             catchRepositoryExceptions(error, 'Erro ao deletar despesa. Por favor, tente novamente.')
         }
+    },
+
+    async getUpcomingExpenses() {
+        try {
+            const { data, error } = await useGet<ApiResponse<Expense[]>>('/expenses/recurrences');
+
+            return data;
+        } catch (error: any) {
+            console.error('Erro ao buscar despesas por categoria:', error);
+            catchRepositoryExceptions(error, 'Erro ao buscar despesas por categoria. Por favor, tente novamente.')
+        }
     }
 }
