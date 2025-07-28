@@ -48,7 +48,8 @@ const activeComponent = computed(() => tabs[activeTab.value]);
       />
     </div>
 
-    <component :is="activeComponent" />
-
+    <keep-alive>
+        <component :is="activeComponent" />
+    </keep-alive>
   </div>
 </template>
