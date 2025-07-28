@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ExpenseRepository } from '~/repositories/expense/ExpenseRepository';
-import { useExpenseStore } from '~/store/useExpenseStore';
+import MyExpenses from '~/components/Expenses/MyExpenses.vue';
+import UpcomingExpenses from '~/components/Expenses/UpcomingExpenses.vue';
 
 useSeoMeta({
     title: 'Home | RecordaMe',
@@ -11,21 +11,14 @@ definePageMeta({
   middleware: ['auth']
 })
 
-await Promise.all([
-  ExpenseRepository.getExpenses(),
-  ExpenseRepository.getUpcomingExpenses(),
-])
-
-const expenseStore = useExpenseStore();
-
-const expenses = computed(() => expenseStore.expenses);
-const upcomingExpenses = computed(() => expenseStore.upcomingExpenses);
-
 const activeTab = ref('myExpenses');
 
-const displayedExpenses = computed(() => {
-  return activeTab.value === 'myExpenses' ? expenses.value : upcomingExpenses.value;
-});
+const tabs = {
+  myExpenses: MyExpenses,
+  upcomingExpenses: UpcomingExpenses
+}
+
+const activeComponent = computed(() => tabs[activeTab.value]);
 
 </script>
 
@@ -43,30 +36,19 @@ const displayedExpenses = computed(() => {
     </div>
 
     <div class="flex gap-4 mx-4 mb-4">
-      <ButtonsBtn
+      <ButtonsTabButton
         text="Minhas despesas"
         @click="activeTab = 'myExpenses'"
-        :variant="activeTab === 'myExpenses' ? 'primary' : 'secondary'"
+        :is-active="activeTab === 'myExpenses'"
       />
-      <ButtonsBtn
+      <ButtonsTabButton
         text="Próximas despesas"
         @click="activeTab = 'upcomingExpenses'"
-        :variant="activeTab === 'upcomingExpenses' ? 'primary' : 'secondary'"
+        :is-active="activeTab === 'upcomingExpenses'"
       />
     </div>
 
-    <div v-for="expense in displayedExpenses" :key="expense.id">
-      <CardExpenseCard 
-        :id="expense.id"
-        :name="expense.name"
-        :createdAt="expense.created_at"
-        :value="expense.amount"
-        :dueDate="expense.due_date"
-        :category="expense.category.name"
-        :paid="!!expense.payment_date"
-        :status="expense.status"
-        :show-actions="activeTab === 'myExpenses'"
-      />
-    </div>
+    <component :is="activeComponent" />
+
   </div>
 </template>
