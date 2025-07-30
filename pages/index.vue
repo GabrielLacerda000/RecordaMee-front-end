@@ -11,12 +11,12 @@ definePageMeta({
   middleware: ['auth']
 })
 
-const activeTab = ref('myExpenses');
-
-const tabs = {
+const tabs: Record<string, any> = {
   myExpenses: MyExpenses,
   upcomingExpenses: UpcomingExpenses
 }
+
+const activeTab = ref<string>('myExpenses');
 
 const activeComponent = computed(() => tabs[activeTab.value]);
 
