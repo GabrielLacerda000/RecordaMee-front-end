@@ -7,9 +7,19 @@ export type LoginForm = {
     password: string
 }
 
+export type RegisterForm = {
+    name: string
+    email: string
+    password: string
+}
+
 export type LoginResponse = {
     user: User
     token: string
+}
+
+export type RegisterResponse = {
+    message: string
 }
 
 export type UserRepsonse = {
@@ -17,6 +27,34 @@ export type UserRepsonse = {
 }
 
 export const AuthRepository = {
+    async register(form: RegisterForm) {
+        try {
+            const { data, error } = await usePost<ApiResponse<RegisterResponse>>('/register', { body: form })
+
+            if (error.value) {
+                throw new Error(error.value.message || 'Erro na requisição')
+            }
+
+            if (data.value?.status === 'error') {
+                throw new Error(data.value.message || 'Erro na requisição')
+            }
+
+            const toast = useToast()
+
+            toast.add({
+                title: 'Sucesso',
+                description: data.value?.message || 'Usuário cadastrado com sucesso!',
+                color: 'success',
+            })
+
+            navigateTo('/login')
+        } catch (error: any) {
+            console.error('Erro ao cadastrar usuário:', error)
+
+            catchRepositoryExceptions(error, 'Erro ao cadastrar usuário. Por favor, tente novamente.')
+        }
+    },
+
      async login(form: LoginForm) {
         
         try {

@@ -82,6 +82,12 @@ const handleLogin = async (event: FormSubmitEvent<Schema>) => {
         </div>
 
         <ButtonsBtn text="Entrar" type="submit" />
+
+        <div class="text-center mt-4">
+            <NuxtLink to="/register" class="text-sm text-blue-400 hover:underline">
+                Não tem uma conta? Crie uma
+            </NuxtLink>
+        </div>
       </UForm>
     </div>
   </div>
