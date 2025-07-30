@@ -216,7 +216,7 @@ export const ExpenseRepository = {
             expenseStore.setUpcomingExpenses(data.value?.data || []);
 
              toast.add({
-              title: 'Despesad buscadas com sucesso!',
+              title: 'Despesas futuras buscadas com sucesso!',
               color: 'success',
             })
 
