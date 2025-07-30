@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { AuthRepository, type RegisterForm } from '~/repositories/authRepository';
+import { AuthRepository } from '~/repositories/authRepository'
+import * as z from 'zod'
+import type { FormSubmitEvent } from '@nuxt/ui'
 
 useSeoMeta({
     title: 'Crie sua conta | RecordaMe',
@@ -11,24 +13,39 @@ definePageMeta({
   middleware: ['guest']
 })
 
-const form = ref<RegisterForm>({
-    name: '',
-    email: '',
-    password: ''
+const schema = z.object({
+  name: z.string().min(3, 'O nome deve ter no mínimo 3 caracteres'),
+  email: z.email('Insira um email válido'),
+  password: z.string().min(8, 'A senha deve conter pelo menos 8 caracteres'),
 })
 
-const loading = ref(false)
+type Schema = z.output<typeof schema>
 
-const onSubmit = async () => {
-    loading.value = true
-    try {
-        await AuthRepository.register(form.value)
-    } catch (error) {
-        console.error('Erro ao criar conta:', error)
-    } finally {
-        loading.value = false
-    }
+const form = reactive<Partial<Schema>>({
+  name: '',
+  email: '',
+  password: ''
+})
+
+const toast = useToast()
+
+const handleRegister = async (event: FormSubmitEvent<Schema>) => {
+  try {
+    await AuthRepository.register(event.data)
+    toast.add({
+      title: 'Conta criada com sucesso!',
+    })
+
+  } catch (error) {
+    toast.add({
+      title: 'Uh oh! Something went wrong.',
+      description: 'There was a problem with your request.',
+      color: 'error'
+    })
+    console.error('Register failed:', error);
+  }
 }
+
 </script>
 
 <template>
@@ -37,27 +54,27 @@ const onSubmit = async () => {
             <h2 class="text-3xl font-bold text-center text-white">Crie sua conta</h2>
             <p class="text-center text-gray-400 mt-2">Crie sua conta para começar a usar o RecordaMe</p>
 
-            <form @submit.prevent="onSubmit" class="mt-8 space-y-6">
-                <FormGroup label="Nome">
+            <UForm :schema="schema" :state="form" @submit="handleRegister" class="mt-8 space-y-6">
+                <UFormField label="Nome" name="name">
                     <Input v-model="form.name" type="text" placeholder="Seu nome" />
-                </FormGroup>
+                </UFormField>
 
-                <FormGroup label="Email">
+                <UFormField label="Email" name="email">
                     <Input v-model="form.email" type="email" placeholder="seuemail@email.com" />
-                </FormGroup>
+                </UFormField>
 
-                <FormGroup label="Senha">
+                <UFormField label="Senha" name="password">
                     <Input v-model="form.password" type="password" placeholder="Sua senha" />
-                </FormGroup>
+                </UFormField>
 
-                <ButtonsBtn :loading="loading" type="submit" text="Criar conta" />
+                <ButtonsBtn type="submit" text="Criar conta" />
 
                 <div class="text-center mt-4">
                     <NuxtLink to="/login" class="text-sm text-blue-400 hover:underline">
                         Já tem uma conta? Faça login
                     </NuxtLink>
                 </div>
-            </form>
+            </UForm>
         </div>
     </div>
 </template>
