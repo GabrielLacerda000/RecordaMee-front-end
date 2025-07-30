@@ -17,14 +17,19 @@ const schema = z.object({
   name: z.string().min(3, 'O nome deve ter no mínimo 3 caracteres'),
   email: z.email('Insira um email válido'),
   password: z.string().min(8, 'A senha deve conter pelo menos 8 caracteres'),
-})
+  password_confirmation: z.string().min(8, 'A senha deve conter pelo menos 8 caracteres'),
+}).refine((data) => data.password === data.password_confirmation, {
+  message: 'As senhas não coincidem',
+  path: ['password_confirmation'],
+});
 
 type Schema = z.output<typeof schema>
 
 const form = reactive<Partial<Schema>>({
   name: '',
   email: '',
-  password: ''
+  password: '',
+  password_confirmation: ''
 })
 
 const toast = useToast()
@@ -65,6 +70,10 @@ const handleRegister = async (event: FormSubmitEvent<Schema>) => {
 
                 <UFormField label="Senha" name="password">
                     <UInput v-model="form.password" type="password" placeholder="Sua senha" />
+                </UFormField>
+
+                <UFormField label="Confirme sua senha" name="password_confirmation">
+                    <UInput v-model="form.password_confirmation" type="password" placeholder="Confirme sua senha" />
                 </UFormField>
 
                 <ButtonsBtn type="submit" text="Criar conta" />
