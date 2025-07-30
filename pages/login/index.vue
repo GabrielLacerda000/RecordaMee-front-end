@@ -59,21 +59,22 @@ const handleLogin = async (event: FormSubmitEvent<Schema>) => {
 
       <UForm :schema="schema" :state="form" @submit="handleLogin">
         <UFormField label="Email" name="email">
-          <FormInput
+          <UInput 
             id="email"
             v-model="form.email"
             type="email"
-            class="border rounded w-full py-2 px-3 text-[#F5F5F5] leading-tight focus:outline-none focus:shadow-outline"
+            class="w-full py-2 px-3"
             placeholder="Digite seu email"
           />
         </UFormField>
 
         <UFormField label="Senha" name="password">
-          <FormInput
+          <UInput 
             id="password"
             v-model="form.password"
             type="password"
             placeholder="Digite sua senha"
+            class="w-full py-2 px-3"
           />
         </UFormField>
 

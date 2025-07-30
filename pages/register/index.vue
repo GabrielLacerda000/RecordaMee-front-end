@@ -56,15 +56,15 @@ const handleRegister = async (event: FormSubmitEvent<Schema>) => {
 
             <UForm :schema="schema" :state="form" @submit="handleRegister" class="mt-8 space-y-6">
                 <UFormField label="Nome" name="name">
-                    <Input v-model="form.name" type="text" placeholder="Seu nome" />
+                    <UInput v-model="form.name" type="text" placeholder="Seu nome" />
                 </UFormField>
 
                 <UFormField label="Email" name="email">
-                    <Input v-model="form.email" type="email" placeholder="seuemail@email.com" />
+                    <UInput v-model="form.email" type="email" placeholder="seuemail@email.com" />
                 </UFormField>
 
                 <UFormField label="Senha" name="password">
-                    <Input v-model="form.password" type="password" placeholder="Sua senha" />
+                    <UInput v-model="form.password" type="password" placeholder="Sua senha" />
                 </UFormField>
 
                 <ButtonsBtn type="submit" text="Criar conta" />
