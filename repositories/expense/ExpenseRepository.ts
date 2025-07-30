@@ -7,9 +7,9 @@ const toast = useToast()
 
 
 export const ExpenseRepository = {
-    async getExpenses() {
+    async getExpenses(page: number = 1) {
         try {
-            const { data, error } = await useGet<ApiResponse<Expense[]>>('/expenses');
+            const { data, error } = await useGet<ApiResponse<Expense[]>>(`/expenses?page=${page}`);
 
             if (error.value) {
                 throw new Error(error.value.message || 'Erro na requisição');
@@ -20,7 +20,9 @@ export const ExpenseRepository = {
             }
             
             const expenseStore = useExpenseStore();
-            expenseStore.setExpenses(data.value?.data || []);
+            expenseStore.addExpenses(data.value?.data || []);
+
+            return data.value;
 
         } catch (error: any) {
             console.error('Erro ao buscar despesas:', error);

@@ -8,6 +8,10 @@ export const useExpenseStore = defineStore('expense', () => {
 
    const addExpense = (newExpense: Expense) => expenses.value.push(newExpense)
 
+   const addExpenses = (newExpenses: Expense[]) => {
+    expenses.value.push(...newExpenses)
+   }
+
    const setExpense = (newExpense: Expense) => expense.value = newExpense
 
    const setExpenses = (newExpenses: Expense[]) => expenses.value = newExpenses
@@ -23,6 +27,7 @@ export const useExpenseStore = defineStore('expense', () => {
     expense,
     upcomingExpenses,
     addExpense,
+    addExpenses,
     setExpenses,
     setExpense,
     removeExpense,
