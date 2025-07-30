@@ -107,7 +107,7 @@ async function handleDelete() {
 
       <div class="ml-4">
         <p class="text-lg font-bold">{{ name }}</p>
-        <p class="text-sm text-gray-500">{{ formatDate(createdAt) }}</p>
+        <!-- <p class="text-sm text-gray-500">{{ formatDate(createdAt) }}</p> -->
       </div>
     </div>
 
