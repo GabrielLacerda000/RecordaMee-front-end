@@ -42,8 +42,8 @@ const handleLogin = async (event: FormSubmitEvent<Schema>) => {
   } catch (error) {
 
     toast.add({
-      title: 'Uh oh! Something went wrong.',
-      description: 'There was a problem with your request.',
+      title: 'Erro ao entrar',
+      description: 'Ocorreu um erro ao tentar entrar. Verifique suas credenciais e tente novamente.',
       color: 'error'
     })
     console.error('Login failed:', error);
